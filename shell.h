@@ -1,4 +1,4 @@
-#ifndef SHELL_H 
+#ifndef SHELL_H
 #define SHELL_H
 
 #include <stdio.h>
@@ -44,12 +44,12 @@ extern char **environ;
  */
 typedef struct liststr
 {
-    int num;
-    char *str;
-    struct liststr *next;
+int num;
+char *str;
+struct liststr *next;
 } list_t;
 
-/** 
+/**
  *struct passinfo - contains pseudo-arguements to pass into a function,
  *                allowing uniform prototype for function pointer struct
  *@arg: a string gnerated from getline containing arguements
@@ -73,30 +73,30 @@ typedef struct liststr
 */
 typedef struct passinfo
 {
-    char *arg;
-    char **argv;
-    char *path;
-    int argc;
-    unsigned int line_count;
-    int err_num;
-    int linecount_flag;
-    char *fname;
-    list_t *env;
-    list_t *history;
-    list_t *alias;
-    char **environ;
-    int env_changed;
-    int status;
+char *arg;
+char **argv;
+char *path;
+int argc;
+unsigned int line_count;
+int err_num;
+int linecount_flag;
+char *fname;
+list_t *env;
+list_t *history;
+list_t *alias;
+char **environ;
+int env_changed;
+int status;
 
-    char **cmd_buf; /* pointer to cmd; chain buffer, for memory mangement */
-    int cmd_buf_type; /* CMD_type ||, &&, ;*/
-    int readfd;
-    int histcount;
+char **cmd_buf; /* pointer to cmd; chain buffer, for memory mangement */
+int cmd_buf_type; /* CMD_type ||, &&, ;*/
+int readfd;
+int histcount;
 } info_t;
 
 #define INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-    0, 0, 0}
+0, 0, 0}
 
 /**
  *struct builtin - contains a builtin string and related function
@@ -105,18 +105,18 @@ typedef struct passinfo
 */
 typedef struct builtin
 {
-    char *type;
-    int (*func) (info_t *);
+char *type;
+int(*func) (info_t *);
 } builtin_table;
 
 /* hsh.c */
-int hsh (info_t *, char **);
+int hsh(info_t *, char **);
 
 /* hah.c */
-int hsh (info_t *, char **);
-int find_builtin (info_t *);
-void find_cmd (info_t *);
-void fork_cmd (info_t *);
+int hsh(info_t *, char **);
+int find_builtin(info_t *);
+void find_cmd(info_t *);
+void fork_cmd(info_t *);
 
 /* path.c */
 int is_cmd(info_t *, char *);
@@ -130,13 +130,13 @@ int loophsh(char **);
 void _eputs(char *);
 int _eputchar(char);
 int _putfd(char c, int fd);
-int _putsfd (char *str, int fd);
+int _putsfd(char *str, int fd);
 
 /* string_functions.c */
-int _strlen (char *);
-int _strcmp (char *, char *);
-char *starts_with (const char *, const char *);
-char *_strcat (char *, char *);
+int _strlen(char *);
+int _strcmp(char *, char *);
+char *starts_with(const char *, const char *);
+char *_strcat(char *, char *);
 
 /* string_functions2.c */
 char *_strcpy(char *, char *);
@@ -159,16 +159,16 @@ void ffree(char **);
 void *_realloc(void *, unsigned int, unsigned int);
 
 /* memory_functions2.c */
-int bfree (void **);
+int bfree(void **);
 
 /* more functions.c */
 int interactive(info_t *);
-int is_delim (char, char *);
-int _isalpha (int);
+int is_delim(char, char *);
+int _isalpha(int);
 int _atoi(char *);
 
 /* more functions2.c */
-int _erratoi (char *);
+int _erratoi(char *);
 void print_error(info_t *, char *);
 int print_d(int, int);
 char *convert_number(long int, int, int);
@@ -176,29 +176,29 @@ void remove_comments(char *);
 
 /* builtin_emulators.c */
 int _myexit(info_t *);
-int _mycd (info_t *);
-int _myhelp (info_t *);
+int _mycd(info_t *);
+int _myhelp(info_t *);
 
 /* builtin emulators2.c */
-int _myhistory (info_t *);
-int _myalias (info_t *);
+int _myhistory(info_t *);
+int _myalias(info_t *);
 
 /* getline.c module */
 ssize_t get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
-void _sigintHandler (int);
+void _sigintHandler(int);
 
 /* info.c module */
 void clear_info(info_t *);
 void set_info(info_t *, char **);
-void free_info (info_t *, int);
+void free_info(info_t *, int);
 
 /* env.c module */
 char *_getenv(info_t *, const char *);
 int _myenv(info_t *);
 int _mysetenv(info_t *);
 int _myunsetenv(info_t *);
-int populate_env_list (info_t *);
+int populate_env_list(info_t *);
 
 /* env2.c module */
 char **get_environ(info_t *);
